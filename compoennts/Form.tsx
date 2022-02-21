@@ -1,4 +1,4 @@
-import { randomUUID } from "crypto";
+import PasswordStrengthBar from "react-password-strength-bar";
 import { useRef, useState } from "react";
 
 export default function Form() {
@@ -135,6 +135,7 @@ export default function Form() {
                     value={resultValue}
                     placeholder="Your Generated Password Will Appear Here"
                 />
+                <PasswordStrengthBar password={resultValue} shortScoreWord="" />
                 <button
                     type="button"
                     onClick={() => {
