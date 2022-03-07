@@ -1,0 +1,13 @@
+.container
+    position: absolute
+    right: 0
+
+    display: flex
+
+    &.open
+        background: red
+
+    > .outside
+        width: 3rem
+        &::after
+            content: var(--sidebar-width)

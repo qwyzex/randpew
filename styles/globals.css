@@ -9,3 +9,7 @@
     font-family: "Poppins";
     transition: 0.2s ease;
 }
+
+body {
+    overflow: hidden
+}
