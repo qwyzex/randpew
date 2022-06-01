@@ -1,13 +1,203 @@
+@import ./Vars.module
+
+@media ( max-width: 11140rem )
+    .container
+        &.open
+            .overlay
+                background-color: #00000090
+                pointer-events: all
+
+$tabWidthMin: 20rem
+$tabWidthMax: calc(90vw - 5rem)
+
+.overlay
+    width: 100vw
+    height: 100vh
+    position: fixed
+    top: 0
+    left: 0
+
+    pointer-events: none
+
+    background-color: #00000000
+    transition: .3s ease
+    z-index: -1
+
 .container
     position: absolute
     right: 0
+    z-index: 1
 
-    display: flex
+    pointer-events: none
 
     &.open
-        background: red
+        .main
+            transform: translateX(-10px)
 
-    > .outside
-        width: 3rem
-        &::after
-            content: var(--sidebar-width)
+            .buttonWrapper
+                > button
+                    > p
+                        transform: rotate(90deg) translateY(-3px)
+                        // transform: rotate(90deg)
+            
+            .history
+                visibility: visible
+                opacity: 1
+
+    .main
+        display: flex
+        flex-direction: row
+        align-items: center
+        justify-content: center
+        pointer-events: all
+
+        position: relative
+
+        transform: translateX($tabWidthMin)
+
+        .buttonWrapper
+            position: absolute
+            right: 100%
+            // top: 0  
+
+            > button
+                padding: .2rem
+                font-size: 4rem
+                border-radius: 0.13em
+                outline: 2.5px solid transparent
+
+                border: none
+                box-shadow: 0 0 .8rem #20202040
+                background-color: $acc
+                color: #ffffff
+
+                transform: translateX(-10px)
+                cursor: pointer
+
+                &:hover 
+                    background-color: $sec
+
+                &:active 
+                    background-color: $sec
+                    outline: 2.5px solid #088fdd
+
+                > p
+                    transform: rotate(-90deg)
+                    user-select: none
+
+        .history
+            position: relative
+            width: $tabWidthMin
+            // max-width: $tabWidthMax
+            background: var(--backgroundDim)
+
+            padding: .4rem
+            color: var(--textDim)
+
+            border-radius: 10px
+            box-shadow: -2px 0 1rem $shd
+
+            visibility: hidden
+            opacity: 0
+            transition: .3s ease
+
+            > div
+                display: flex
+                justify-content: space-between
+                padding:  .5em .6rem
+
+                > button
+                    background-color: $acc
+                    font-weight: 600
+                    color: #ffffff
+
+                    padding: .4rem
+                    border-radius: .3em
+                    border: none
+                    cursor: pointer
+
+                    &:not(:disabled)
+                        &:hover
+                            transform: translateY(-2px)
+                        &:active
+                            transform: translateY(-1px)
+
+                    &:disabled
+                        background-color: $shd
+                        cursor: not-allowed
+
+            > ul
+                // height: auto
+                padding: .5em
+                min-height: calc( 30rem - 3vh )
+                max-height: calc( 90vh - 4rem )
+                overflow-y: scroll
+
+                position: relative
+                display: flex
+                flex-direction: column
+                gap: .8rem
+
+                > div
+                    position: absolute
+                    top: 50%
+                    left: 50%
+                    transform: translate(-50%, -50%)
+
+                    font-weight: 600
+                    text-align: center
+
+                    display: flex
+                    justify-content: center
+                    align-items: center
+
+                > li
+                    display: flex
+                    flex-direction: column
+                    gap: .2rem
+
+                    p
+                        font-size: 0.8em
+                    > div
+                        display: flex
+                        justify-content: center
+                        align-items: center
+                        gap: .6rem
+
+                        > button
+                            background-color: var(--backgroundDim)
+                            // box-shadow: 0 3px 6px #20202030
+                            cursor: pointer
+
+                            display: flex
+                            justify-content: center
+                            align-items: center
+                            position: relative
+
+                            border-radius: 0.3rem
+                            border: none
+                            outline: none
+
+                            &:hover
+                                transform: translateY(-2px)
+                            &:active
+                                transform: translateY(-1px)
+
+                            > svg
+                                fill: var(--textDim)
+                                filter: drop-shadow(0 0 6px #20202030)
+
+                        > input
+                            width: 100%
+
+                            background-color: var(--background)
+                            color: $acc
+                            font-size: 1rem
+                            font-weight: 600
+
+                            padding: .2em
+                            border-radius: 3px
+
+                            border: none
+                            outline: none
+
