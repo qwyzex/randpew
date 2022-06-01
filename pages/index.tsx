@@ -1,19 +1,13 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import Form from "../components/Form";
-import History from "../components/History";
-import Info from "../components/Info";
 import Sidebar from "../components/Sidebar";
 import SVG from "../components/SVG";
 import styles from "../styles/Home.module.sass";
 
 const Home: NextPage = () => {
     const [theme, setTheme] = useState<string>("light");
-    const [openedAdditionalTab, setOpenedAdditionalTab] = useState<
-        "history" | "info" | ""
-    >("");
 
     function getTheme() {
         let theme = localStorage.getItem("theme");
@@ -41,7 +35,7 @@ const Home: NextPage = () => {
                     content="Modern Save Random Password Generator"
                 />
                 <link rel="icon" href="/favicon.ico" />
-            </Head>{" "}
+            </Head>
             <div className={styles.themeButtonWrapper}>
                 <button
                     className={styles.themeButton}
@@ -60,8 +54,8 @@ const Home: NextPage = () => {
                     {/* {theme === "light" ? <SVG.Sun /> : <SVG.Moon />} */}
                 </button>
             </div>
-            <Form />
             <Sidebar />
+            <Form />
         </div>
     );
 };
