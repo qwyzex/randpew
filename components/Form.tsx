@@ -1,10 +1,12 @@
 import PasswordStrengthBar from "react-password-strength-bar";
 import { useRef, useState } from "react";
 import styles from "../styles/Form.module.sass";
+import useLocalHistory from "../hooks/useLocalHistory";
 
 export default function Form() {
     const [resultValue, setResultValue] = useState<string>("");
     let [copied, setCopied] = useState<boolean>(false);
+    let localHistory = useLocalHistory();
 
     // options
     const [charactersLength, setCharactersLength] = useState<number>(8);
@@ -51,6 +53,14 @@ export default function Form() {
             result += formula[Math.floor(Math.random() * formula.length)];
         }
         setResultValue(result);
+
+        let localPasswords = JSON.parse(localStorage.getItem("passwords")!);
+        let newLocalPW = localPasswords
+            ? [...localPasswords, { password: result, date: new Date() }]
+            : [{ password: result, date: new Date() }];
+
+        localStorage.setItem("passwords", JSON.stringify(newLocalPW));
+        localHistory.getNewList();
     };
 
     // jsx
@@ -141,7 +151,7 @@ export default function Form() {
                         type="text"
                         className={styles.resultValue}
                         value={resultValue}
-                        placeholder="Your Generated Password Will Appear Here"
+                        placeholder="Your Generated Password"
                     />
                     <input
                         className={styles.generateButton}
