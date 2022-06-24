@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 export default function useLocalHistory() {
-    const [passwords, setPasswords] = useState<Array<any>>([]);
+    const [passwords, setPasswords] = useState<Array<string>>([]);
 
     function getNewList() {
         const v = JSON.parse(localStorage.getItem("passwords")!);
