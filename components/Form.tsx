@@ -186,6 +186,13 @@ export default function Form() {
                             "Strong",
                             "Very Strong",
                         ]}
+                        barColors={[
+                            "grey",
+                            "darkslategrey",
+                            "slateblue",
+                            "cadetblue",
+                            "rgb(16, 140, 255)",
+                        ]}
                     />
                 </div>
             </main>
