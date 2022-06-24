@@ -28,12 +28,13 @@ $tabWidthMax: calc(90vw - 5rem)
     right: 0
     z-index: 1
 
+    overflow: hidden
     pointer-events: none
+    width: 100vw
 
     &.open
         .main
             transform: translateX(-10px)
-
             .buttonWrapper
                 > button
                     > p
@@ -48,23 +49,19 @@ $tabWidthMax: calc(90vw - 5rem)
         display: flex
         flex-direction: row
         align-items: center
-        justify-content: center
-        pointer-events: all
+        justify-content: flex-end
 
         position: relative
-
-        transform: translateX($tabWidthMin)
+        // overflow: hidden
+        transform: translateX(calc( $tabWidthMin))
 
         .buttonWrapper
-            position: absolute
-            right: 100%
-            // top: 0  
-
             > button
                 padding: .2rem
                 font-size: 4rem
                 border-radius: 0.13em
                 outline: 2.5px solid transparent
+                pointer-events: all
 
                 border: none
                 box-shadow: 0 0 .8rem #20202040
@@ -100,6 +97,7 @@ $tabWidthMax: calc(90vw - 5rem)
             visibility: hidden
             opacity: 0
             transition: .3s ease
+            pointer-events: all
 
             > div
                 display: flex
