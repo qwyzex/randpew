@@ -1,9 +1,40 @@
 import { useState, useEffect, useRef } from "react";
-import History from "./History";
-import Info from "./Info";
 import styles from "../styles/Sidebar.module.sass";
 import SVG from "./SVG";
 import useLocalHistory from "../hooks/useLocalHistory";
+
+function List(
+    index: number,
+    item: {
+        password: string;
+        date: string;
+    },
+    local: {
+        list: string[];
+        getNewList(): void;
+    }
+) {
+    return (
+        <li key={index}>
+            <div>
+                <input readOnly value={item.password} />
+                <button
+                    onClick={() => {
+                        local.list.splice(index, 1);
+                        localStorage.setItem("passwords", JSON.stringify(local.list));
+                        local.getNewList();
+                    }}
+                >
+                    <SVG.Trash />
+                </button>
+            </div>
+            <p>
+                {new Date(Date.parse(item.date)).toLocaleString()} | Length :{" "}
+                {item.password.length}
+            </p>
+        </li>
+    );
+}
 
 export default function Sidebar() {
     const [open, setOpen] = useState(false);
@@ -33,11 +64,6 @@ export default function Sidebar() {
                     </button>
                 </div>
                 <div className={styles.history}>
-                    {
-                        // history tab
-                    }
-                    {/* {local.list && (
-                        <> */}
                     <div>
                         <h1>HISTORY</h1>
                         <button
@@ -59,35 +85,11 @@ export default function Sidebar() {
                     <hr />
                     <ul>
                         {local.list?.length ? (
-                            local.list.map((v, i) => (
-                                <li key={i}>
-                                    <div>
-                                        <input readOnly value={v.password} />
-                                        <button
-                                            onClick={() => {
-                                                local.list.splice(i, 1);
-                                                localStorage.setItem(
-                                                    "passwords",
-                                                    JSON.stringify(local.list)
-                                                );
-                                                local.getNewList();
-                                            }}
-                                        >
-                                            <SVG.Trash />
-                                        </button>
-                                    </div>
-                                    <p>
-                                        {new Date(Date.parse(v.date)).toLocaleString()} |
-                                        Length : {v.password.length}
-                                    </p>
-                                </li>
-                            ))
+                            eval(`local.list.map((v, i) => List(i, v, local)).reverse()`)
                         ) : (
                             <div>NO RECORDED GENERATED PASSWORD</div>
                         )}
                     </ul>
-                    {/* </>
-                    )} */}
                 </div>
             </section>
             <section
@@ -96,40 +98,4 @@ export default function Sidebar() {
             ></section>
         </aside>
     );
-}
-
-function useLocalStorage<T>(key: string, initialValue: T) {
-    const [storedValue, setStoredValue] = useState<T>(() => {
-        if (typeof window === "undefined") {
-            return initialValue;
-        }
-        try {
-            // Get from local storage by key
-            const item = window.localStorage.getItem(key);
-            // Parse stored json or if none return initialValue
-            return item ? JSON.parse(item) : initialValue;
-        } catch (error) {
-            // If error also return initialValue
-            console.log(error);
-            return initialValue;
-        }
-    });
-    // Return a wrapped version of useState's setter function that ...
-    // ... persists the new value to localStorage.
-    const setValue = (value: T | ((val: T) => T)) => {
-        try {
-            // Allow value to be a function so we have same API as useState
-            const valueToStore = value instanceof Function ? value(storedValue) : value;
-            // Save state
-            setStoredValue(valueToStore);
-            // Save to local storage
-            if (typeof window !== "undefined") {
-                window.localStorage.setItem(key, JSON.stringify(valueToStore));
-            }
-        } catch (error) {
-            // A more advanced implementation would handle the error case
-            console.log(error);
-        }
-    };
-    return [storedValue, setValue] as const;
 }
