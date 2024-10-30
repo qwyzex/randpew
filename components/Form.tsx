@@ -1,7 +1,8 @@
 import PasswordStrengthBar from "react-password-strength-bar";
-import { useRef, useState } from "react";
+import {useRef, useState} from "react";
 import styles from "../styles/Form.module.sass";
 import useLocalHistory from "../hooks/useLocalHistory";
+import Image from "next/image";
 
 export default function Form() {
     const [resultValue, setResultValue] = useState<string>("");
@@ -56,14 +57,20 @@ export default function Form() {
 
         let localPasswords = JSON.parse(localStorage.getItem("passwords")!);
         let newLocalPW = localPasswords
-            ? [...localPasswords, { password: result, date: new Date() }]
-            : [{ password: result, date: new Date() }];
+            ? [...localPasswords, {password: result, date: new Date()}]
+            : [{password: result, date: new Date()}];
 
         localStorage.setItem("passwords", JSON.stringify(newLocalPW));
         localHistory.getNewList();
     };
 
-    // jsx
+    const SuccessCopyMessage = () => {
+        return <p className={`${styles.successCopyMessage} ${copied ? styles.show : ""}`}>
+            COPIED!
+        </p>;
+    }
+
+// jsx
     return (
         <>
             <main className={styles.container}>
@@ -79,12 +86,11 @@ export default function Form() {
                                     )
                                 );
                             }}
+                            defaultValue={8}
                         >
                             <option value={4}>4</option>
                             <option value={6}>6</option>
-                            <option selected value={8}>
-                                8
-                            </option>
+                            <option value={8}>8</option>
                             <option value={10}>10</option>
                             <option value={12}>12</option>
                             <option value={14}>14</option>
@@ -144,7 +150,7 @@ export default function Form() {
                         />
                     </div>
                 </section>
-                <hr />
+                <hr/>
                 <div className={styles.resultWrapper}>
                     <input
                         readOnly
@@ -169,7 +175,7 @@ export default function Form() {
                                 setCopied(true);
                                 setTimeout(() => {
                                     setCopied(false);
-                                }, 6000);
+                                }, 4000);
                             }
                         }}
                     >
@@ -196,9 +202,7 @@ export default function Form() {
                     />
                 </div>
             </main>
-            <p className={`${styles.successCopyMessage} ${copied ? styles.show : ""}`}>
-                COPIED!
-            </p>
+            {copied && <SuccessCopyMessage/>}
         </>
     );
 }

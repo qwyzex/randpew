@@ -39,7 +39,7 @@ body {
 }
 
 
-.logo_backdrop {
+#logo_backdrop {
     position: absolute;
     top: 0;
     left: 0;

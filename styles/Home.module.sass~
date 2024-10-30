@@ -13,7 +13,7 @@
 
   &.light
     --background: #f0f0f0
-    --backgroundDim: #eee
+    --backgroundDim: #aaa
     --text: #202020
     --textDim: #35344d
 

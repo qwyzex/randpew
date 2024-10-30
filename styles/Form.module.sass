@@ -43,6 +43,8 @@
     background-color: var(--backgroundDim)
     color: var(--text)
 
+    z-index: 1
+
     hr 
         margin-block: 20px
 
@@ -100,7 +102,7 @@
 
 .successCopyMessage
     position: absolute
-    bottom: -10rem
+    bottom: 1rem
     left: 50%
     transform: translateX(-50%)
 
@@ -115,5 +117,16 @@
 
     transition: 0.3s ease
 
-    &.show
+    animation: show 4s ease
+
+
+// animation for success copy message
+@keyframes show
+    0%
+        bottom: -10rem
+    15%
         bottom: 1rem
+    85%
+        bottom: 1rem
+    100%
+        bottom: -10rem
