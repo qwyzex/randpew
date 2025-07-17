@@ -1,6 +1,6 @@
-import type {NextPage} from "next";
+import type { NextPage } from "next";
 import Head from "next/head";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import Form from "../components/Form";
 import Sidebar from "../components/Sidebar";
 import SVG from "../components/SVG";
@@ -25,9 +25,8 @@ const Home: NextPage = () => {
 
     return (
         <div
-            className={`${styles.container} ${
-                theme === "dark" ? styles.dark : styles.light
-            }`}
+            className={`${styles.container} ${theme === "dark" ? styles.dark : styles.light
+                }`}
         >
             <Head>
                 <title>Randpew</title>
@@ -35,11 +34,11 @@ const Home: NextPage = () => {
                     name="description"
                     content="Modern, Safe, Open Source Random Password Generator"
                 />
-                <link rel="icon" href="/icon_white_pink.png"/>
+                <link rel="icon" href="/icon_white_pink.png" />
             </Head>
 
             <div className={styles.logo_backdrop}>
-                <Image src={'/logo_full.png'} width={650} height={800} alt=""/>
+                <Image src={"/logo_full.png"} width={1300} height={1600} alt="" />
             </div>
 
             <div className={styles.themeButtonWrapper}>
@@ -55,13 +54,13 @@ const Home: NextPage = () => {
                         }
                     }}
                 >
-                    <SVG.Sun className={theme === "light" ? styles.active : ""}/>
-                    <SVG.Moon className={theme === "dark" ? styles.active : ""}/>
+                    <SVG.Sun className={theme === "light" ? styles.active : ""} />
+                    <SVG.Moon className={theme === "dark" ? styles.active : ""} />
                     {/* {theme === "light" ? <SVG.Sun /> : <SVG.Moon />} */}
                 </button>
             </div>
-            <Sidebar/>
-            <Form/>
+            <Form />
+            <Sidebar />
         </div>
     );
 };

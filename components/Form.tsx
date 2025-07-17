@@ -1,5 +1,5 @@
 import PasswordStrengthBar from "react-password-strength-bar";
-import {useRef, useState} from "react";
+import { useRef, useState } from "react";
 import styles from "../styles/Form.module.sass";
 import useLocalHistory from "../hooks/useLocalHistory";
 import Image from "next/image";
@@ -57,25 +57,30 @@ export default function Form() {
 
         let localPasswords = JSON.parse(localStorage.getItem("passwords")!);
         let newLocalPW = localPasswords
-            ? [...localPasswords, {password: result, date: new Date()}]
-            : [{password: result, date: new Date()}];
+            ? [...localPasswords, { password: result, date: new Date() }]
+            : [{ password: result, date: new Date() }];
 
         localStorage.setItem("passwords", JSON.stringify(newLocalPW));
         localHistory.getNewList();
     };
 
     const SuccessCopyMessage = () => {
-        return <p className={`${styles.successCopyMessage} ${copied ? styles.show : ""}`}>
-            COPIED!
-        </p>;
-    }
+        return (
+            <p className={`${styles.successCopyMessage} ${copied ? styles.show : ""}`}>
+                COPIED!
+            </p>
+        );
+    };
 
-// jsx
+    // jsx
     return (
         <>
             <main className={styles.container}>
                 <section className={styles.options}>
-                    <h1>OPTIONS</h1>
+                    <div>
+                        <h1>OPTIONS</h1>
+                        {/* <button>OPEN</button> */}
+                    </div>
                     <div>
                         <label>LENGTH</label>
                         <select
@@ -150,7 +155,7 @@ export default function Form() {
                         />
                     </div>
                 </section>
-                <hr/>
+                <hr />
                 <div className={styles.resultWrapper}>
                     <input
                         readOnly
@@ -202,7 +207,7 @@ export default function Form() {
                     />
                 </div>
             </main>
-            {copied && <SuccessCopyMessage/>}
+            {copied && <SuccessCopyMessage />}
         </>
     );
 }

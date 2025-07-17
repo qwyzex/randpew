@@ -60,7 +60,8 @@ export default function Sidebar() {
             <section className={styles.main}>
                 <div className={styles.buttonWrapper}>
                     <button onClick={() => setOpen(!open)}>
-                        <p>&#9652;</p>
+                        {/* <p>&#9652;</p> */}
+                        <p>OPEN</p>
                     </button>
                 </div>
                 <div className={styles.history}>
